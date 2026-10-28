@@ -1,0 +1,15 @@
+{
+  "name": "octav-public",
+  "owner": { "name": "Octav" },
+  "metadata": {
+    "description": "Skill-uri si hooks de web-dev pentru Claude Code: session state, securitate web, audit UI, auto-format.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "octav-helpers",
+      "source": "./plugins/octav-helpers",
+      "description": "session-state (reluare exacta din STATE.md), secure-web-defaults, web-interface-guidelines, auto-format cu Prettier."
+    }
+  ]
+}

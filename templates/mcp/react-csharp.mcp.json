@@ -1,0 +1,21 @@
+{
+  "//": "Per-proiect MCP pentru React/Vite frontend + C#/.NET backend. Copiaza ca .mcp.json in radacina proiectului.",
+  "//csharp-lsp": "Pentru .NET, activeaza plugin-ul csharp-lsp@claude-plugins-official in .claude/settings.json (e plugin, nu MCP) si: dotnet tool install --global csharp-ls",
+  "mcpServers": {
+    "context7": {
+      "//": "Docs la zi (React/Vite/.NET). Cost mic.",
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp@latest"]
+    },
+    "serena": {
+      "//": "Cod la nivel de SIMBOL prin LSP (40+ limbaje incl. C#). Economie mare de tokeni pe codebase mari. Necesita 'uv' instalat (https://docs.astral.sh/uv).",
+      "command": "uvx",
+      "args": ["--from", "git+https://github.com/oraios/serena", "serena", "start-mcp-server", "--context", "ide-assistant"]
+    },
+    "playwright": {
+      "//": "Verificare vizuala a frontend-ului React.",
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"]
+    }
+  }
+}

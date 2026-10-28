@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Pre-commit: blocheaza secretele inainte sa intre in istoricul git (gitleaks).
+# Instaleaza in proiect cu:  bash ~/claude-stack/templates/git/install-pre-commit.sh
+# Necesita:  brew install gitleaks
+# Alternativa recomandata (versiune auto-pinata): framework 'pre-commit' + templates/git/.pre-commit-config.yaml
+set -euo pipefail
+
+command -v gitleaks >/dev/null 2>&1 || {
+  echo "⚠ gitleaks neinstalat (brew install gitleaks) — sar peste scanarea de secrete." >&2
+  exit 0
+}
+
+# gitleaks a redenumit subcomenzile in timp; daca 'protect' nu exista, nu bloca degeaba.
+if ! gitleaks protect --help >/dev/null 2>&1; then
+  echo "⚠ Versiunea ta de gitleaks nu are 'protect'. Foloseste framework-ul pre-commit" >&2
+  echo "  (templates/git/.pre-commit-config.yaml). Sar peste acum." >&2
+  exit 0
+fi
+
+if ! gitleaks protect --staged --redact --no-banner; then
+  echo "⛔ Posibile secrete in modificarile staged. Commit OPRIT." >&2
+  echo "  Scoate secretul, sau (rar si constient):  git commit --no-verify" >&2
+  exit 1
+fi

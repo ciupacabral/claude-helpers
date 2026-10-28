@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "octav-helpers",
+  "description": "Personal helper skills, hooks and secure web defaults for Octav's stacks.",
+  "author": { "name": "Octav" },
+  "license": "MIT",
+  "keywords": ["web", "security", "next.js", "react", "csharp", "supabase"]
+}

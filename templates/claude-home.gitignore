@@ -1,0 +1,20 @@
+# Allowlist .gitignore pentru ~/.claude DACĂ alegi să-l versionezi direct (Abordarea B).
+# Ignoră tot, apoi re-include doar bucățile portabile. Restul (secrete/state/cache) rămâne ignorat.
+*
+
+!.gitignore
+!settings.json
+!CLAUDE.md
+!commands/
+!commands/**
+!skills/
+!skills/**
+!agents/
+!agents/**
+!hooks/
+!hooks/**
+
+# NU versiona niciodată (sunt deja prinse de '*' de mai sus — listate ca reminder):
+#   .credentials.json   .claude.json   settings.local.json
+#   plugins/  projects/  sessions/  shell-snapshots/  file-history/
+#   history.jsonl  todos/  statsig/  *.token  *.pem  .env*

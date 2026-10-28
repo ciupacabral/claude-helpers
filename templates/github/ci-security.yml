@@ -1,0 +1,49 @@
+# CI de securitate — RULEAZĂ FĂRĂ CLAUDE (zero cost API).
+# Claude te ajută doar să scrii/ajustezi acest fișier; execuția e a GitHub-ului.
+# Copiază în <proiect>/.github/workflows/security.yml
+name: security
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  secrets:
+    name: Secret scan (gitleaks + trufflehog)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: gitleaks
+        uses: gitleaks/gitleaks-action@v2   # gratis pt. repo personal/public; org-urile cer GITLEAKS_LICENSE
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: trufflehog
+        uses: trufflesecurity/trufflehog@main
+        with:
+          extra_args: --results=verified,unknown
+
+  sast:
+    name: SAST (Semgrep — advisory)
+    runs-on: ubuntu-latest
+    container:
+      image: semgrep/semgrep
+    steps:
+      - uses: actions/checkout@v4
+      - run: semgrep scan --config auto --error || true   # '|| true' = nu pică build-ul; scoate-l ca să fie blocant
+
+  deps:
+    name: Dependencies (advisory)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+      - run: npm audit --audit-level=high || true
+      # .NET: dotnet list package --vulnerable --include-transitive

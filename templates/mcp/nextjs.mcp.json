@@ -1,0 +1,20 @@
+{
+  "//": "Per-proiect MCP pentru Next.js + Tailwind + shadcn. Copiaza ca .mcp.json in radacina proiectului. Se incarca DOAR in acest proiect (economie de tokeni).",
+  "mcpServers": {
+    "context7": {
+      "//": "Docs la zi, version-specific (anti-halucinatie API React/Next/Tailwind). Cost mic (2 tool-uri).",
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp@latest"]
+    },
+    "shadcn": {
+      "//": "Aduce componente reale din registry (nu ghiceste API-uri). Necesita shadcn in proiect.",
+      "command": "npx",
+      "args": ["shadcn@latest", "mcp"]
+    },
+    "playwright": {
+      "//": "Verificare vizuala: snapshot a11y-tree (ieftin) + click/fill/screenshot/network.",
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"]
+    }
+  }
+}

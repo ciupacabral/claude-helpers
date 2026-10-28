@@ -1,0 +1,13 @@
+**/bin/
+**/obj/
+**/node_modules/
+**/dist/
+**/.next/
+.git/
+.github/
+docs/
+*.md
+.env
+.env.*
+*.local.json
+**/.DS_Store

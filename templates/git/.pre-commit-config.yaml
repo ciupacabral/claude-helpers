@@ -1,0 +1,11 @@
+# Varianta RECOMANDATA, cu framework-ul 'pre-commit' (versiune auto-pinata, comanda mereu corecta).
+# Setup intr-un proiect:
+#   brew install pre-commit          # sau: pipx install pre-commit
+#   cp ~/claude-stack/templates/git/.pre-commit-config.yaml .
+#   pre-commit install                # instaleaza hook-ul git
+#   pre-commit autoupdate             # bumpeaza 'rev' la ultima versiune
+repos:
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.21.2          # ruleaza `pre-commit autoupdate` ca sa il aduci la zi
+    hooks:
+      - id: gitleaks
